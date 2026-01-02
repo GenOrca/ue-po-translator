@@ -270,7 +270,7 @@ export default function Home() {
           </p>
           <p>
             <a
-              href="https://github.com/zenoengine/ue-po-translator"
+              href="https://github.com/genorca/ue-po-translator"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
@@ -281,7 +281,7 @@ export default function Home() {
             <span>Translation API: VARCO</span>
             {' • '}
             <a
-              href="https://github.com/zenoengine/ue-po-translator/blob/main/LICENSE"
+              href="https://github.com/genorca/ue-po-translator/blob/main/LICENSE"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline"

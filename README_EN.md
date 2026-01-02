@@ -16,7 +16,7 @@ Upload `.po` files, translate with AI, review, and download.
 
 ```bash
 # Clone repository
-git clone https://github.com/zenoengine/ue-po-translator.git
+git clone https://github.com/genorca/ue-po-translator.git
 cd ue-po-translator
 
 # Install dependencies

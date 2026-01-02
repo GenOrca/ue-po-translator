@@ -16,7 +16,7 @@
 
 ```bash
 # 저장소 클론
-git clone https://github.com/zenoengine/ue-po-translator.git
+git clone https://github.com/genorca/ue-po-translator.git
 cd ue-po-translator
 
 # 의존성 설치
