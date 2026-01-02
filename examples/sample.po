@@ -1,0 +1,63 @@
+# Game Korean translation sample.
+# Copyright Epic Games, Inc. All Rights Reserved.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Game\n"
+"POT-Creation-Date: 2025-01-30 06:26\n"
+"PO-Revision-Date: 2025-01-30 06:26\n"
+"Language-Team: \n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Key:	2FCC9EFE49BADDCC07340F98C3A4B3E6
+#. SourceLocation:	/Game/Input/Actions/IA_Ability_Dash.IA_Ability_Dash:PlayerMappableKeySettings_0.DisplayName
+#: /Game/Input/Actions/IA_Ability_Dash.IA_Ability_Dash:PlayerMappableKeySettings_0.DisplayName
+msgctxt ",2FCC9EFE49BADDCC07340F98C3A4B3E6"
+msgid "Dash"
+msgstr ""
+
+#. Key:	435FC1FC41A4B4CE6703AB83335BA861
+#. SourceLocation:	/Game/Input/Actions/IA_Ability_Heal.IA_Ability_Heal:PlayerMappableKeySettings_0.DisplayName
+#: /Game/Input/Actions/IA_Ability_Heal.IA_Ability_Heal:PlayerMappableKeySettings_0.DisplayName
+msgctxt ",435FC1FC41A4B4CE6703AB83335BA861"
+msgid "Heal"
+msgstr ""
+
+#. Key:	4B1D63AD486327AF81BB0AB4F29C437D
+#. SourceLocation:	/Game/Input/Actions/IA_AutoRun.IA_AutoRun:PlayerMappableKeySettings_0.DisplayName
+#: /Game/Input/Actions/IA_AutoRun.IA_AutoRun:PlayerMappableKeySettings_0.DisplayName
+msgctxt ",4B1D63AD486327AF81BB0AB4F29C437D"
+msgid "Auto-run"
+msgstr ""
+
+#. Key:	F104DF424959AA30FB62D98DDA7E93A1
+#. SourceLocation:	/Game/Characters/Heroes/Mannequin/Animations/AnimEnum_CardinalDirection.AnimEnum_CardinalDirection.DisplayNameMap(0 - Value).DisplayNameMap
+#: /Game/Characters/Heroes/Mannequin/Animations/AnimEnum_CardinalDirection.AnimEnum_CardinalDirection.DisplayNameMap(0 - Value).DisplayNameMap
+msgctxt ",F104DF424959AA30FB62D98DDA7E93A1"
+msgid "Forward"
+msgstr ""
+
+#. Key:	A3015C164B7B8ECECDCD4EAEB957BCC3
+#. SourceLocation:	/Game/Characters/Heroes/Mannequin/Animations/AnimEnum_CardinalDirection.AnimEnum_CardinalDirection.DisplayNameMap(1 - Value).DisplayNameMap
+#: /Game/Characters/Heroes/Mannequin/Animations/AnimEnum_CardinalDirection.AnimEnum_CardinalDirection.DisplayNameMap(1 - Value).DisplayNameMap
+msgctxt ",A3015C164B7B8ECECDCD4EAEB957BCC3"
+msgid "Backward"
+msgstr ""
+
+#. Key:	0C7962B44C85F255428F648B8F196172
+#. SourceLocation:	/Game/Characters/Heroes/Mannequin/Animations/AnimEnum_CardinalDirection.AnimEnum_CardinalDirection.DisplayNameMap(2 - Value).DisplayNameMap
+#: /Game/Characters/Heroes/Mannequin/Animations/AnimEnum_CardinalDirection.AnimEnum_CardinalDirection.DisplayNameMap(2 - Value).DisplayNameMap
+msgctxt ",0C7962B44C85F255428F648B8F196172"
+msgid "Left"
+msgstr ""
+
+#. Key:	953CDA0342D82F1A164935966EB1B429
+#. SourceLocation:	/Game/Characters/Heroes/Mannequin/Animations/AnimEnum_CardinalDirection.AnimEnum_CardinalDirection.DisplayNameMap(3 - Value).DisplayNameMap
+#: /Game/Characters/Heroes/Mannequin/Animations/AnimEnum_CardinalDirection.AnimEnum_CardinalDirection.DisplayNameMap(3 - Value).DisplayNameMap
+msgctxt ",953CDA0342D82F1A164935966EB1B429"
+msgid "Right"
+msgstr ""
