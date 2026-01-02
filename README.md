@@ -10,6 +10,8 @@
 
 `.po` 파일을 업로드하고 AI로 자동 번역한 후, 검토하고 다운로드하세요.
 
+![Main Interface](https://raw.githubusercontent.com/GenOrca/Screenshot/refs/heads/main/unreal-po-translator/frontend_page.png)
+
 ## 빠른 시작
 
 ### 프로젝트 설치
