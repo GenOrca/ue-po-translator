@@ -107,7 +107,7 @@ export default function Home() {
         updatedEntries[entryIndex] = {
           ...updatedEntries[entryIndex],
           msgstr: translated,
-          status: 'translated',
+          status: 'needs_review',
           error: undefined,
         };
       } catch (error) {
@@ -155,12 +155,14 @@ export default function Home() {
   };
 
   const stats = getTranslationStats(entries);
+  const needsReviewCount = entries.filter((e) => e.status === 'needs_review').length;
 
   // Filter entries based on selected filter mode
   const filteredEntries = entries.filter((entry) => {
     if (filterMode === 'all') return true;
     if (filterMode === 'untranslated') return !entry.msgstr || entry.msgstr.trim() === '';
     if (filterMode === 'translated') return entry.msgstr && entry.msgstr.trim() !== '';
+    if (filterMode === 'needs_review') return entry.status === 'needs_review';
     return true;
   });
 
@@ -247,6 +249,18 @@ export default function Home() {
                     >
                       Translated ({stats.translated})
                     </button>
+                    {needsReviewCount > 0 && (
+                      <button
+                        onClick={() => setFilterMode('needs_review')}
+                        className={`px-3 py-1 text-sm rounded transition-colors ${
+                          filterMode === 'needs_review'
+                            ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 font-medium'
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                        }`}
+                      >
+                        Needs Review ({needsReviewCount})
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="flex gap-2">

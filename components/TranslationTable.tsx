@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { POEntryWithStatus } from '@/lib/types';
-import { Check, X, Loader2, Edit2 } from 'lucide-react';
+import { Check, X, Loader2, Edit2, Eye } from 'lucide-react';
 
 interface TranslationTableProps {
   entries: POEntryWithStatus[];
@@ -34,6 +34,8 @@ export default function TranslationTable({ entries, onEntryEdit }: TranslationTa
     switch (status) {
       case 'translated':
         return <Check className="h-4 w-4 text-green-500" />;
+      case 'needs_review':
+        return <Eye className="h-4 w-4 text-yellow-500" />;
       case 'translating':
         return <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />;
       case 'error':

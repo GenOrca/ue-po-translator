@@ -11,7 +11,7 @@ export interface POEntry {
 }
 
 // Translation Status
-export type TranslationStatus = 'untranslated' | 'translated' | 'translating' | 'error';
+export type TranslationStatus = 'untranslated' | 'translated' | 'translating' | 'error' | 'needs_review';
 
 // Entry with UI state
 export interface POEntryWithStatus extends POEntry {
@@ -24,7 +24,7 @@ export interface POEntryWithStatus extends POEntry {
 export type TranslationMode = 'server' | 'personal';
 
 // Filter Mode for viewing entries
-export type FilterMode = 'all' | 'untranslated' | 'translated';
+export type FilterMode = 'all' | 'untranslated' | 'translated' | 'needs_review';
 
 // VARCO API Types
 export interface VarcoTranslateRequest {
