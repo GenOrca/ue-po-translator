@@ -10,6 +10,7 @@ import { parsePOFile, getUntranslatedEntries, generatePOFile, addIdsToEntries, g
 import { translateText } from '@/lib/varcoApi';
 import { loadSettings, saveSettings, getDefaultSettings } from '@/lib/storage';
 import type { POEntry, POEntryWithStatus, AppSettings, FilterMode } from '@/lib/types';
+import { SUPPORTED_LANGUAGES } from '@/lib/types';
 
 export default function Home() {
   const [settings, setSettings] = useState<AppSettings>(getDefaultSettings());
@@ -252,7 +253,12 @@ export default function Home() {
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-lg font-semibold mb-2">{filename}</h2>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h2 className="text-lg font-semibold">{filename}</h2>
+                    <span className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded">
+                      {SUPPORTED_LANGUAGES[settings.sourceLang].split(' ')[0]} → {SUPPORTED_LANGUAGES[settings.targetLang].split(' ')[0]}
+                    </span>
+                  </div>
                   <div className="flex gap-6 text-sm">
                     <div>
                       <span className="text-gray-500 dark:text-gray-400">Total: </span>
