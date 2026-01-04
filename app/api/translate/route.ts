@@ -4,19 +4,19 @@ const VARCO_API_URL = 'https://openapi.ai.nc.com/mt/chat-content/v1/translate';
 
 export async function POST(request: NextRequest) {
   try {
-    // Get API key from environment variable
-    const apiKey = process.env.VARCO_API_KEY;
+    // Parse request body
+    const body = await request.json();
+    const { source_text, source_lang, target_lang, game_code = 'linw', api_key } = body;
+
+    // Use client-provided API key or fall back to environment variable
+    const apiKey = api_key || process.env.VARCO_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json(
-        { message: 'API key not configured. Please set VARCO_API_KEY environment variable.' },
+        { message: 'API key not configured. Please set VARCO_API_KEY environment variable or provide your own API key.' },
         { status: 500 }
       );
     }
-
-    // Parse request body
-    const body = await request.json();
-    const { source_text, source_lang, target_lang, game_code = 'linw' } = body;
 
     // Validate required fields
     if (!source_text || !source_lang || !target_lang) {

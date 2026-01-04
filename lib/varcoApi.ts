@@ -1,15 +1,11 @@
 import type {
-  VarcoTranslateRequest,
-  VarcoTranslateResponse,
-  VarcoErrorResponse,
   LanguageCode,
   TranslationMode,
 } from './types';
 
-const VARCO_API_URL = 'https://openapi.ai.nc.com/mt/chat-content/v1/translate';
-
 /**
- * Translate text using VARCO API (client-side for Personal mode)
+ * Translate text using VARCO API via server proxy (Personal mode with user API key)
+ * Routes through Next.js API to avoid CORS issues
  */
 export async function translateWithVarcoClient(
   apiKey: string,
@@ -18,39 +14,26 @@ export async function translateWithVarcoClient(
   targetLang: LanguageCode,
   gameCode: string = 'linw'
 ): Promise<string> {
-  const request: VarcoTranslateRequest = {
-    TID: crypto.randomUUID(),
-    game_code: gameCode,
-    provider: 'chat',
-    source_lang: sourceLang,
-    source_text: sourceText,
-    target_lang: targetLang,
-  };
-
-  const response = await fetch(VARCO_API_URL, {
+  const response = await fetch('/api/translate', {
     method: 'POST',
     headers: {
-      'openapi_key': apiKey,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(request),
+    body: JSON.stringify({
+      source_text: sourceText,
+      source_lang: sourceLang,
+      target_lang: targetLang,
+      game_code: gameCode,
+      api_key: apiKey,
+    }),
   });
 
   if (!response.ok) {
-    const errorText = await response.text();
-    console.error('VARCO API error:', response.status, errorText);
-
-    let error;
-    try {
-      error = JSON.parse(errorText);
-    } catch {
-      error = { message: errorText };
-    }
-
-    throw new Error(error.message || `Translation failed (${response.status})`);
+    const error = await response.json();
+    throw new Error(error.message || 'Translation failed');
   }
 
-  const data: VarcoTranslateResponse = await response.json();
+  const data = await response.json();
   return data.target_text;
 }
 

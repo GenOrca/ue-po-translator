@@ -23,6 +23,9 @@ export interface POEntryWithStatus extends POEntry {
 // Translation Mode
 export type TranslationMode = 'server' | 'personal';
 
+// Filter Mode for viewing entries
+export type FilterMode = 'all' | 'untranslated' | 'translated';
+
 // VARCO API Types
 export interface VarcoTranslateRequest {
   TID: string;

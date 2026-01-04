@@ -9,7 +9,7 @@ import SettingsModal from '@/components/SettingsModal';
 import { parsePOFile, getUntranslatedEntries, generatePOFile, addIdsToEntries, getTranslationStats } from '@/lib/poParser';
 import { translateText } from '@/lib/varcoApi';
 import { loadSettings, saveSettings, getDefaultSettings } from '@/lib/storage';
-import type { POEntry, POEntryWithStatus, AppSettings } from '@/lib/types';
+import type { POEntry, POEntryWithStatus, AppSettings, FilterMode } from '@/lib/types';
 
 export default function Home() {
   const [settings, setSettings] = useState<AppSettings>(getDefaultSettings());
@@ -19,6 +19,7 @@ export default function Home() {
   const [entries, setEntries] = useState<POEntryWithStatus[]>([]);
   const [isTranslating, setIsTranslating] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
+  const [filterMode, setFilterMode] = useState<FilterMode>('all');
 
   // Load settings from localStorage on mount
   useEffect(() => {
@@ -155,6 +156,14 @@ export default function Home() {
 
   const stats = getTranslationStats(entries);
 
+  // Filter entries based on selected filter mode
+  const filteredEntries = entries.filter((entry) => {
+    if (filterMode === 'all') return true;
+    if (filterMode === 'untranslated') return !entry.msgstr || entry.msgstr.trim() === '';
+    if (filterMode === 'translated') return entry.msgstr && entry.msgstr.trim() !== '';
+    return true;
+  });
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Header */}
@@ -206,6 +215,39 @@ export default function Home() {
                       <span className="font-medium text-orange-600">{stats.untranslated}</span>
                     </div>
                   </div>
+                  {/* Filter Buttons */}
+                  <div className="flex gap-1 mt-2">
+                    <button
+                      onClick={() => setFilterMode('all')}
+                      className={`px-3 py-1 text-sm rounded transition-colors ${
+                        filterMode === 'all'
+                          ? 'bg-gray-200 dark:bg-gray-700 font-medium'
+                          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                      }`}
+                    >
+                      All ({stats.total})
+                    </button>
+                    <button
+                      onClick={() => setFilterMode('untranslated')}
+                      className={`px-3 py-1 text-sm rounded transition-colors ${
+                        filterMode === 'untranslated'
+                          ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 font-medium'
+                          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                      }`}
+                    >
+                      Untranslated ({stats.untranslated})
+                    </button>
+                    <button
+                      onClick={() => setFilterMode('translated')}
+                      className={`px-3 py-1 text-sm rounded transition-colors ${
+                        filterMode === 'translated'
+                          ? 'bg-green-100 dark:bg-green-900/30 text-green-600 font-medium'
+                          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                      }`}
+                    >
+                      Translated ({stats.translated})
+                    </button>
+                  </div>
                 </div>
                 <div className="flex gap-2">
                   <button
@@ -248,7 +290,7 @@ export default function Home() {
 
             {/* Translation Table */}
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow overflow-hidden">
-              <TranslationTable entries={entries} onEntryEdit={handleEntryEdit} />
+              <TranslationTable entries={filteredEntries} onEntryEdit={handleEntryEdit} />
             </div>
           </div>
         )}
