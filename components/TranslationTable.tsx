@@ -2,14 +2,15 @@
 
 import { useState } from 'react';
 import type { POEntryWithStatus } from '@/lib/types';
-import { Check, X, Loader2, Edit2, Eye } from 'lucide-react';
+import { Check, X, Loader2, Edit2, Eye, Languages } from 'lucide-react';
 
 interface TranslationTableProps {
   entries: POEntryWithStatus[];
   onEntryEdit?: (id: string, newTranslation: string) => void;
+  onTranslate?: (id: string) => void;
 }
 
-export default function TranslationTable({ entries, onEntryEdit }: TranslationTableProps) {
+export default function TranslationTable({ entries, onEntryEdit, onTranslate }: TranslationTableProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
 
@@ -126,14 +127,26 @@ export default function TranslationTable({ entries, onEntryEdit }: TranslationTa
                     </button>
                   </div>
                 ) : (
-                  <button
-                    onClick={() => handleEdit(entry)}
-                    className="text-blue-600 hover:text-blue-700 dark:text-blue-400"
-                    title="Edit"
-                    disabled={entry.status === 'translating'}
-                  >
-                    <Edit2 className="h-4 w-4" />
-                  </button>
+                  <div className="flex gap-2">
+                    {onTranslate && (
+                      <button
+                        onClick={() => onTranslate(entry.id)}
+                        className="text-blue-600 hover:text-blue-700 dark:text-blue-400"
+                        title="Translate"
+                        disabled={entry.status === 'translating'}
+                      >
+                        <Languages className="h-4 w-4" />
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleEdit(entry)}
+                      className="text-gray-600 hover:text-gray-700 dark:text-gray-400"
+                      title="Edit"
+                      disabled={entry.status === 'translating'}
+                    >
+                      <Edit2 className="h-4 w-4" />
+                    </button>
+                  </div>
                 )}
               </td>
             </tr>

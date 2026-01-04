@@ -60,6 +60,56 @@ export default function Home() {
     );
   }, []);
 
+  // Translate single entry
+  const handleTranslateOne = useCallback(async (id: string) => {
+    const entry = entries.find((e) => e.id === id);
+    if (!entry) return;
+
+    // Check if API key is required
+    if (settings.mode === 'personal' && !settings.apiKey) {
+      alert('Please set your VARCO API key in Settings (Personal API Key mode)');
+      setShowSettings(true);
+      return;
+    }
+
+    // Mark as translating
+    setEntries((prev) =>
+      prev.map((e) =>
+        e.id === id ? { ...e, status: 'translating' as const } : e
+      )
+    );
+
+    try {
+      const translated = await translateText(
+        settings.mode,
+        entry.msgid,
+        settings.sourceLang,
+        settings.targetLang,
+        {
+          apiKey: settings.apiKey,
+          gameCode: settings.gameCode,
+        }
+      );
+
+      setEntries((prev) =>
+        prev.map((e) =>
+          e.id === id
+            ? { ...e, msgstr: translated, status: 'needs_review' as const, error: undefined }
+            : e
+        )
+      );
+    } catch (error) {
+      console.error('Translation failed:', error);
+      setEntries((prev) =>
+        prev.map((e) =>
+          e.id === id
+            ? { ...e, status: 'error' as const, error: error instanceof Error ? error.message : 'Unknown error' }
+            : e
+        )
+      );
+    }
+  }, [entries, settings]);
+
   // Translate all untranslated entries
   const handleTranslateAll = async () => {
     const untranslated = entries.filter((e) => !e.msgstr);
@@ -304,7 +354,7 @@ export default function Home() {
 
             {/* Translation Table */}
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow overflow-hidden">
-              <TranslationTable entries={filteredEntries} onEntryEdit={handleEntryEdit} />
+              <TranslationTable entries={filteredEntries} onEntryEdit={handleEntryEdit} onTranslate={handleTranslateOne} />
             </div>
           </div>
         )}
